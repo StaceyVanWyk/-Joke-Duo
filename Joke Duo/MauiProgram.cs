@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.Net.Http;
+using Joke_Duo.Services;
+
 
 namespace Joke_Duo
 {
@@ -17,6 +20,9 @@ namespace Joke_Duo
 
 #if DEBUG
     		builder.Logging.AddDebug();
+
+            builder.Services.AddSingleton<HttpClient>();
+            builder.Services.AddSingleton<JokeService>();
 #endif
 
             return builder.Build();
