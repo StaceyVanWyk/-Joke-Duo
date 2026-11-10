@@ -6,10 +6,11 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Joke_Duo.Services.Interfaces;
 
 namespace Joke_Duo.Services;
 
-public class JokeService
+public class JokeService : IJokeApiService
 {
     private readonly HttpClient _httpClient;
 
