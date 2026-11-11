@@ -1,35 +1,52 @@
-﻿# Joke Dou
-##  Part 1: API Investigation
+## 1. API Investigation
 
-### Joke Duo uses two external APIs to retrieve rando jokes.
+Joke Duo integrates two external REST APIs to retrieve random jokes.
 
-## 1. Chuck Norris Joke API
+### 1.1 Chuck Norris Joke API
 
-### Endpoint: https://api.chucknorris.io/jokes/random
+**Endpoint:** https://api.chucknorris.io/jokes/random
 
+**HTTP Method:** GET
 
-- HTTP method: GET
+**Response Format:** JSON
 
-- Response format: JSON
+The Chuck Norris API provides random jokes through an HTTP GET request.
 
-- Data used: value
+The API returns a JSON response containing several properties. The application uses the `value` property, which contains the actual joke.
 
-The application sends a GET request to the endpoint. The API returns a JSON response containing a random Chuck Norris joke. The application uses the value field to retrieve and display the joke.
+No additional request headers are required.
 
-## 2. Dad Joke API
+### 1.2 Dad Joke API
 
-### Endpoint: https://icanhazdadjoke.com/
+**Endpoint:** https://icanhazdadjoke.com/
 
-- HTTP method: GET
+**HTTP Method:** GET
 
-- Request header: Accept: application/json
+**Response Format:** JSON
 
-- Response format: JSON
+The Dad Joke API provides random dad jokes through an HTTP GET request.
 
-- Data used: joke
+The application sends the following request header:
 
-The application sends a GET request with the Accept: application/json header. This tells the API to return JSON data. The application uses the joke field to retrieve and display the dad joke.
+`Accept: application/json`
 
-## 3. API Comparison
+This tells the API that the application expects a JSON response.
 
-Both APIs use HTTP GET requests and return JSON responses. However, they use different property names for their joke content. The Chuck Norris API uses value, while the Dad Joke API uses joke.
+The application uses the `joke` property to retrieve the actual joke.
+
+### 1.3 API Comparison
+
+Both APIs use HTTP GET requests and return JSON responses.
+
+However, they use different property names to store their joke content:
+
+- Chuck Norris API: `value`
+- Dad Joke API: `joke`
+
+These properties will be mapped to C# response models during implementation.
+
+### 1.4 API Integration Approach
+
+The application will use a dedicated API service to communicate with both endpoints.
+
+The service will handle HTTP requests and JSON deserialization. The ViewModel will receive the returned jokes and expose them to the View for display.
