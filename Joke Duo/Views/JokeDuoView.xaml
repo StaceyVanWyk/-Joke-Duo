@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="JokeDuo.Views.JokeDuoView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Joke Duo"
+    BackgroundColor="#10121A">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24,40"
+            Spacing="24">
+
+            <!-- Header -->
+            <VerticalStackLayout Spacing="6">
+                <Label
+                    Text="JOKE DUO"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    TextColor="#A78BFA"
+                    CharacterSpacing="3" />
+
+                <Label
+                    Text="Double the jokes."
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="White" />
+
+                <Label
+                    Text="A little humour goes a long way."
+                    FontSize="15"
+                    TextColor="#A1A1AA" />
+            </VerticalStackLayout>
+
+            <!-- Chuck Norris Joke Card -->
+            <Border
+                BackgroundColor="#202333"
+                Stroke="#4F46E5"
+                StrokeThickness="1"
+                Padding="20"
+                StrokeShape="RoundRectangle 20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="01  |  CHUCK NORRIS"
+                        FontSize="12"
+                        FontAttributes="Bold"
+                        TextColor="#A78BFA"
+                        CharacterSpacing="1.5" />
+
+                    <Label
+                        Text="{Binding ChuckNorrisJoke}"
+                        FontSize="18"
+                        TextColor="White"
+                        LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Dad Joke Card -->
+            <Border
+                BackgroundColor="#202333"
+                Stroke="#F59E0B"
+                StrokeThickness="1"
+                Padding="20"
+                StrokeShape="RoundRectangle 20">
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="02  |  DAD JOKES"
+                        FontSize="12"
+                        FontAttributes="Bold"
+                        TextColor="#FBBF24"
+                        CharacterSpacing="1.5" />
+
+                    <Label
+                        Text="{Binding DadJoke}"
+                        FontSize="18"
+                        TextColor="White"
+                        LineBreakMode="WordWrap" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                Color="#A78BFA" />
+
+            <!-- Fetch Jokes Button -->
+            <Button
+                Text="Get New Jokes"
+                Command="{Binding GetNewJokesCommand}"
+                IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBooleanConverter}, FallbackValue=True}"
+                BackgroundColor="#7C3AED"
+                TextColor="White"
+                FontSize="16"
+                FontAttributes="Bold"
+                CornerRadius="14"
+                HeightRequest="56" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

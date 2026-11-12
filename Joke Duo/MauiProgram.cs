@@ -1,6 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Joke_Duo.Services;
+using Joke_Duo.Services.Interfaces;
+using Microsoft.Extensions.Logging;
 using System.Net.Http;
-using Joke_Duo.Services;
+using JokeDuo.ViewModels;
+using JokeDuo.Views;
 
 
 namespace Joke_Duo
@@ -22,7 +25,10 @@ namespace Joke_Duo
     		builder.Logging.AddDebug();
 
             builder.Services.AddSingleton<HttpClient>();
-            builder.Services.AddSingleton<JokeService>();
+            builder.Services.AddSingleton<ConfigurationService>();
+            builder.Services.AddSingleton<IJokeApiService, JokeApiHttpService>();
+            builder.Services.AddTransient<JokeDuoViewModel>();
+            builder.Services.AddTransient<JokeDuoView>();
 #endif
 
             return builder.Build();
